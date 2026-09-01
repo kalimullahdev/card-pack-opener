@@ -212,10 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotX = -deltaY * 14;
       packWrapper.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-      // Move pack foil glare
-      const glareX = 50 + deltaX * 40;
-      const glareY = 50 + deltaY * 40;
-      packFoilGlare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, rgba(56,189,248,0.2) 35%, transparent 65%)`;
+      // Smooth linear metallic sheen sweep across the pack
+      const sweepPos = 50 + deltaX * 30;
+      packFoilGlare.style.background = `linear-gradient(${135 + deltaX * 20}deg, transparent 0%, rgba(255,255,255,0.06) ${sweepPos - 20}%, rgba(255,255,255,0.24) ${sweepPos}%, rgba(255,255,255,0.06) ${sweepPos + 20}%, transparent 100%)`;
     } 
     else if (state === 'REVEALED') {
       // Full 3D Interactive Card Tilt

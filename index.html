@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcane Legends - Animated Card Pack Opener</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+  <!-- Fullscreen Particle Effects Canvas -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Top Navigation Bar -->
+  <header class="header-bar">
+    <div class="logo-group">
+      <div class="logo-icon">✨</div>
+      <div class="logo-text">
+        <h1>ARCANE RIFT</h1>
+        <p>3D Booster Opener</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="collection-badge" id="collectionCountBadge">Discovered: 0 / 12</div>
+      <button class="glass-btn" id="btnSoundToggle" title="Toggle Sound FX">
+        <span id="soundIcon">🔊</span> Sound
+      </button>
+      <button class="glass-btn" id="btnOpenBinder">
+        <span>📖</span> Collection
+      </button>
+    </div>
+  </header>
+
+  <!-- Main 3D Interactive Stage -->
+  <main class="stage-container" id="stageContainer">
+    <div class="stage-spotlight" id="stageSpotlight"></div>
+
+    <div class="pack-wrapper" id="packWrapper">
+      <!-- 3D Foil Booster Pack -->
+      <div class="booster-pack" id="boosterPack">
+        <!-- Top Tear Strip Seal -->
+        <div class="pack-top-seal" id="packTopSeal">
+          <div class="crimp-pattern"></div>
+          <div class="tear-indicator">
+            <span>✂️</span> TEAR HERE TO OPEN
+          </div>
+        </div>
+
+        <!-- Main Foil Pack Body -->
+        <div class="pack-main-body">
+          <div class="pack-foil-glare" id="packFoilGlare"></div>
+          <div class="pack-emblem">⚡</div>
+          <div class="pack-brand">
+            <h2>Arcane Rift</h2>
+            <p>MYTHIC EDITION</p>
+          </div>
+          <div class="pack-footer">
+            <span>1 FOIL CARD</span>
+            <span>SERIES I</span>
+          </div>
+          <div class="pack-bottom-seal"></div>
+        </div>
+      </div>
+
+      <!-- The Animated Card (Rises up & reveals from pack) -->
+      <div class="card-item" id="cardItem" data-rarity="common">
+        <!-- Holographic Glare Overlays -->
+        <div class="card-holo-layer" id="cardHoloLayer"></div>
+        <div class="card-glare-hotspot" id="cardGlareHotspot"></div>
+
+        <!-- Card Back Face -->
+        <div class="card-face card-back">
+          <div class="card-back-pattern">
+            <div class="card-back-sigil">🔮</div>
+          </div>
+        </div>
+
+        <!-- Card Front Face -->
+        <div class="card-face card-front" id="cardFrontFace">
+          <!-- Card Header -->
+          <div class="card-header">
+            <div class="card-name-group">
+              <span class="card-name" id="cardName">Card Name</span>
+              <span class="card-title" id="cardTitle">Title</span>
+            </div>
+            <div class="card-cost-badge" id="cardCost">7</div>
+          </div>
+
+          <!-- Card Artwork -->
+          <div class="card-art-frame">
+            <div id="cardArtContainer" class="card-art-svg"></div>
+            <div class="card-element-pill" id="cardElementPill">
+              <span id="cardElementIcon">✨</span>
+              <span id="cardElementName">Celestial</span>
+            </div>
+          </div>
+
+          <!-- Card Details & Lore -->
+          <div class="card-details">
+            <div class="card-ability" id="cardAbility">Card Ability Description</div>
+            <div class="card-lore" id="cardLore">Card Lore Text</div>
+          </div>
+
+          <!-- Card Footer & Stats -->
+          <div class="card-footer-stats">
+            <div class="card-rarity-tag" id="cardRarityTag">COMMON</div>
+            <div class="card-stats-group">
+              <div class="stat-badge stat-atk">
+                <span>⚔️</span>
+                <span id="cardAtk">5000</span>
+              </div>
+              <div class="stat-badge stat-def">
+                <span>🛡️</span>
+                <span id="cardDef">5000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Control Panel -->
+  <footer class="control-dock">
+    <div class="selector-panel">
+      <label for="cardSelector" class="selector-label">
+        <span>🎯</span> Open Mode:
+      </label>
+      <select id="cardSelector" class="card-select">
+        <option value="random">🎲 Mystery Booster Pack (Random Draw)</option>
+        <optgroup label="✨ Mythic (Ultra Rare)">
+          <option value="celestial-valkyrie">Astrid, Aurora Valkyrie (Mythic)</option>
+          <option value="cosmic-singularity">Omniscient Void Eye (Mythic)</option>
+        </optgroup>
+        <optgroup label="👑 Legendary">
+          <option value="solaris-dragon">Solaris the Sunforged (Legendary)</option>
+          <option value="void-leviathan">Abyssal Leviathan (Legendary)</option>
+        </optgroup>
+        <optgroup label="🔮 Epic">
+          <option value="chrono-sage">Aethelgard Chrono-Mage (Epic)</option>
+          <option value="cyber-shinobi">Shinobi-09 Cyber Phantom (Epic)</option>
+        </optgroup>
+        <optgroup label="💎 Rare">
+          <option value="ember-wolf">Pyre Wolf (Rare)</option>
+          <option value="frost-golem">Glacier Titan (Rare)</option>
+          <option value="shadow-assassin">Vesper, Shadow Stalker (Rare)</option>
+        </optgroup>
+        <optgroup label="🛡️ Common">
+          <option value="ironclad-knight">Vanguard Protector (Common)</option>
+          <option value="arcane-sprite">Lumina Fey (Common)</option>
+          <option value="storm-hawk">Thunder Gale Raptor (Common)</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-open-pack" id="btnOpenPack">
+        <span>✨</span> Open Pack
+      </button>
+      <button class="btn-reset" id="btnResetPack">
+        <span>🔄</span> Open Another Pack
+      </button>
+    </div>
+
+    <div class="developer-tag">
+      <span>⚡</span> Developed by <strong>Kalim ullah</strong>
+    </div>
+  </footer>
+
+  <!-- Collection Binder Modal -->
+  <div class="modal-overlay" id="binderModal">
+    <div class="modal-card-binder">
+      <div class="binder-header">
+        <h2>📖 Your Card Album (<span id="binderUnlockedCount">0</span> / 12)</h2>
+        <button class="btn-close-modal" id="btnCloseBinder">✕</button>
+      </div>
+      <div class="binder-grid" id="binderGrid">
+        <!-- Dynamically generated binder slots -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="cards-data.js"></script>
+  <script src="sound-fx.js"></script>
+  <script src="particles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
